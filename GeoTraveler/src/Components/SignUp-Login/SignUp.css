@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   background-color: #4a7f66;
+  position: relative;
 }
 
 .signup input {
