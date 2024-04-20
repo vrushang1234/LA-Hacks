@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { instanceData } from './save.js'
 
 var options = {
   enableHighAccuracy: true,
@@ -9,12 +10,8 @@ var options = {
 function request_location() { //once you have permissions you can just call this for the hints
     navigator.geolocation.getCurrentPosition(success);
 }
-
-//only call AFTER creating daily log
-//if today log
 function success(position) { 
-    start_location = [position.coords.latitude, position.coords.longitude]
-    //send to firestone start_location, update most recent 
+    instanceData.start_location = [position.coords.latitude, position.coords.longitude]
 }
 function error() {
     console.log("Unable to retrieve your location");

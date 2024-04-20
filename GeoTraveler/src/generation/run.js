@@ -11,7 +11,7 @@ function initalize(size, search_radius = 3000) { //create empty json daily log
     if(!userData.date_played || current_date >= temp_date) {
         instanceData.date_played = current_date
         instanceData.guesses = 0
-        //grab startlocation in user prompt
+        //grab startlocation in user prompt before everything else, set instanceData.start_location
         instanceData.destination = generateRandomPoint(start_location, search_radius)
         instanceData.total_distance = distanceToLocation(start_location, destination)
         instanceData.image_url = fetchStreetView(destination, size, 90, Math.random() * 271)
@@ -35,6 +35,11 @@ function check_correct(location) {
         offset_radius = getOffsetRadius(current_distance, maxguesses, guesses)
         createCircle(generateOffsetPoint(destination, offset_radius), offset_radius)
     }
-
     return correct
+}
+
+//send to cloud function to update backend for user
+function add_points() {
+    points = instanceData.maxguesses-instanceData.guesses
+    return (points) >= 0 ? points : 0
 }

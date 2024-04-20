@@ -3,7 +3,6 @@
 
 //include in head for cdn for leaflet */}
 
-//update this accroding to new save
 function createMap(start_location) { //connect to mapid of html
     map = L.map('map').setView([start_location], 11);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
