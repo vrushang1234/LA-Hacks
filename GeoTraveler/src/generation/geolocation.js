@@ -10,8 +10,11 @@ function request_location() { //once you have permissions you can just call this
     navigator.geolocation.getCurrentPosition(success);
 }
 
-function success(position) { //have success set global variable of start location
+//only call AFTER creating daily log
+//if today log
+function success(position) { 
     start_location = [position.coords.latitude, position.coords.longitude]
+    //send to firestone start_location, update most recent 
 }
 function error() {
     console.log("Unable to retrieve your location");
