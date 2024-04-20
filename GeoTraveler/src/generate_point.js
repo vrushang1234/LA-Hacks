@@ -1,3 +1,4 @@
+//data per user per play
 var destination = generateRandomPoint(coordinates) //generated point
 var estimated_total_distance = distanceToLocation(original, destination) //total distance 
 
@@ -6,6 +7,7 @@ var previous_distance = None
 
 //all measurements and math is done in meters
 
+//call ONCE to get destination point
 function generateRandomPoint(coordinates, search_distance = 3000) {
     //conversion radius in meters to degrees /111139, and then choose random ratio to shorten radius (to go along circle)
     r = search_distance/111,319 * sqrt(Math.random())
@@ -13,17 +15,24 @@ function generateRandomPoint(coordinates, search_distance = 3000) {
     return [coordinates[0] + r * Math.cos(theta), coordinates[1] + r * Math.sin(theta)]
 }
 
-function check(location) {
-    distance = distanceToLocation(original, location)
-    
+//call to confirm location/update previous data
+function check_correct(location) {
+    distance = distanceToLocation(location, destination)
+
+    //update previous cache 
     previous_point = location
     previous_distance = distance
-    //what if you over shoot? doesn't matter to us (for now)
+
+    if(distance <= 25) //within 25ft, win
+        return True
+    else
+        return False //can call hints
 }
 
+//call to get hint information
 function hint() {
-    current = request_location()
-    current_distance = distanceToLocation(current, destination)
+    var current = request_location()
+    var current_distance = distanceToLocation(current, destination)
 
     if(previous_distance)
         if(current_distance <= previous_distance)
