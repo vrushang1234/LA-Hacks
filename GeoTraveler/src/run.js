@@ -1,3 +1,6 @@
+import {generateRandomPoint, distanceToLocation} from './generate_point.js'
+import {fetchStreetView} from './generate_image.js'
+
 //data per user per play
 var start_location = [] //star
 var destination = null //generated point
@@ -10,7 +13,7 @@ var previous_distance = null
 
 function initalize(size, search_radius = 3000) {
     destination = generateRandomPoint(start_location, search_radius)
-    estimated_total_distance = distanceToLocation(original, destination)
+    estimated_total_distance = distanceToLocation(start_location, destination)
     image_url = fetchStreetView(destination, size, 90, Math.random() * 271) // cache this
 }
 
