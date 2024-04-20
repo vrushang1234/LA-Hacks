@@ -1,23 +1,50 @@
-//cache this for a user for the day, refresh after a day
-function generateRandomPoint(coordinates, meter = 3000) { //reasonable 3000 meters / 2 miles for default
-    //conversion radius to degrees /111139, and then choose random ratio to shorten radius (to go along circle)
-    r = meter/111139 * sqrt(Math.random());
+var destination = generateRandomPoint(coordinates) //generated point
+var estimated_total_distance = distanceToLocation(original, destination) //total distance 
+
+var previous_guess = None //originally no guesses
+var previous_distance = None
+
+//all measurements and math is done in meters
+
+function generateRandomPoint(coordinates, search_distance = 3000) {
+    //conversion radius in meters to degrees /111139, and then choose random ratio to shorten radius (to go along circle)
+    r = search_distance/111,319 * sqrt(Math.random())
     theta = Math.random() * 2 * PI //choose random degree to affect the coordinates
-    return {'lat': coordinates[0] + r * Math.cos(theta), 'lng': coordinates[1] + r * Math.sin(theta)};
+    return [coordinates[0] + r * Math.cos(theta), coordinates[1] + r * Math.sin(theta)]
 }
 
-function hint(original_location) {
+function check(location) {
+    distance = distanceToLocation(original, location)
+    
+    previous_point = location
+    previous_distance = distance
+    //what if you over shoot? doesn't matter to us (for now)
+}
+
+function hint() {
     current = request_location()
-    //hot if you are within 500ft
-    //if you are less than half the distance away, you're warm
-    //warmer, 
-    //if you're more htan half, you're cold
-    //quarter away, hot
-    //
+    current_distance = distanceToLocation(current, destination)
+
+    if(previous_distance)
+        if(current_distance <= previous_distance)
+            console.log('hotter')
+        else
+            console.log('colder')
+    else
+        if(current_distance <= estimated_total_distance/2)
+            console.log('halfway there, warmer')
+        else
+            console.log('cold')
 }
 
-//reveal after a certain number of guesses
-//reveal possible route after too many guesses
-function distanceToLocation(original_location, current_location) {
-    d = sqrt(Math.pow(current_location[0]-original_location[0], 2) + Math.pow(current_location[1]-original_location[1], 2) )
+//haversine formula
+function distanceToLocation(from, to) {
+    var R = 6371 * 1000; //radius in meters
+    var lat1 = from[0] * Math.PI/180
+    var lat2 = to[0] * Math.PI/180
+    var lat = (to[0] - from[0]) * (Math.PI/180)
+    var lon = (to[1] - from[1]) * (Math.PI/180)
+    var a = Math.sin(lat/2) * Math.sin(lat/2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(lon/2) * Math.sin(lon/2) 
+    var d = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    return d; //distance in meters
 }
