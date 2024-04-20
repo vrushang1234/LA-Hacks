@@ -4,7 +4,7 @@ import SignUp from "./Components/SignUp/SignUp";
 export default function App() {
   return (
     <div className="app">
-      <Navbar />
+      <Navbar /> {/*Navbar */}
       <SignUp />
     </div>
   );
