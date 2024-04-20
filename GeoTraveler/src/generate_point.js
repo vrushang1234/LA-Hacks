@@ -1,49 +1,11 @@
-//data per user per play
-var destination = generateRandomPoint(coordinates) //generated point
-var estimated_total_distance = distanceToLocation(original, destination) //total distance 
-
-var previous_guess = None //originally no guesses
-var previous_distance = None
-
 //all measurements and math is done in meters
 
 //call ONCE to get destination point
-function generateRandomPoint(coordinates, search_distance = 3000) {
+function generateRandomPoint(coordinates, search_distance) {
     //conversion radius in meters to degrees /111139, and then choose random ratio to shorten radius (to go along circle)
     r = search_distance/111,319 * sqrt(Math.random())
     theta = Math.random() * 2 * PI //choose random degree to affect the coordinates
     return [coordinates[0] + r * Math.cos(theta), coordinates[1] + r * Math.sin(theta)]
-}
-
-//call to confirm location/update previous data
-function check_correct(location) {
-    distance = distanceToLocation(location, destination)
-
-    //update previous cache 
-    previous_point = location
-    previous_distance = distance
-
-    if(distance <= 25) //within 25ft, win
-        return True
-    else
-        return False //can call hints
-}
-
-//call to get hint information
-function hint() {
-    var current = request_location()
-    var current_distance = distanceToLocation(current, destination)
-
-    if(previous_distance)
-        if(current_distance <= previous_distance)
-            console.log('hotter')
-        else
-            console.log('colder')
-    else
-        if(current_distance <= estimated_total_distance/2)
-            console.log('halfway there, warmer')
-        else
-            console.log('cold')
 }
 
 //haversine formula

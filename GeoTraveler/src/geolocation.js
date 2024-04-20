@@ -1,5 +1,3 @@
-var original_location = []
-
 import React, { Component } from "react";
 
 var options = {
@@ -12,13 +10,14 @@ function request_location() { //once you have permissions you can just call this
     navigator.geolocation.getCurrentPosition(success);
 }
 
-function success(position) {
-    original_location = [position.coords.latitude, position.coords.longitude]
+function success(position) { //have success set global variable of start location
+    start_location = [position.coords.latitude, position.coords.longitude]
 }
 function error() {
     console.log("Unable to retrieve your location");
 }
 
+//embed in react html
 export default class GeoLocation extends Component { //
     componentDidMount() {
         if (navigator.geolocation) {
