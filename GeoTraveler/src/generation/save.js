@@ -9,7 +9,7 @@ export const apiData = {
 }
 
 export const instanceData = {
-    start_location: [], //star
+    start_location: [], //start
     destination: null, //generated point
     total_distance: null, //total distance 
     image_url: null, //set by streetview function
