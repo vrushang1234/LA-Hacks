@@ -7,3 +7,8 @@
 .app {
   height: 100vh;
 }
+
+button {
+  cursor: pointer;
+  transition: 0.5s;
+}
