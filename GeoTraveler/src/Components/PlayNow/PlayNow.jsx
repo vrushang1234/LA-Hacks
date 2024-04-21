@@ -1,5 +1,8 @@
 import "./PlayNow.css";
+import { React, useEffect, useState } from "react";
 export default function PlayNow() {
+  const [latitude, setlatitude] = useState();
+  const [longitude, setlongitude] = useState();
   return (
     <div className="playnow">
       <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
