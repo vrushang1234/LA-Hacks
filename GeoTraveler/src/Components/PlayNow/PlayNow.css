@@ -1,0 +1,62 @@
+.playnow {
+  height: 90%;
+  background-color: #7ed091;
+}
+
+.map {
+  height: 95%;
+  width: 35%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  background-color: white;
+  border-radius: 30px;
+}
+
+.pic {
+  height: 50%;
+  width: 90%;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  background-color: white;
+  border-radius: 20px;
+}
+.play-buttons {
+  height: 35%;
+  width: 90%;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.guess {
+  padding: 20px 30px 20px 30px;
+  font-size: 1.2rem;
+  border: 0px;
+  background-color: #7ed091;
+  border-radius: 15px;
+  font-weight: bold;
+  color: white;
+}
+
+.guess:hover {
+  color: #7ed091;
+  background-color: white;
+  border: 5px #7ed091 solid;
+}
+
+.hint {
+  padding: 20px 30px 20px 30px;
+  font-size: 1.2rem;
+  border: 0px;
+  background-color: #e76a10;
+  font-weight: bold;
+  border-radius: 15px;
+  color: white;
+}
+
+.hint:hover {
+  color: #e76a10;
+  background-color: white;
+  border: 5px #e76a10 solid;
+}
