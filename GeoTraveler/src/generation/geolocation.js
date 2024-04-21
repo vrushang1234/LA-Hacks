@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import { Component } from "react";
+//install react for this to work
 import { instanceData } from './save.js'
 
 var options = {

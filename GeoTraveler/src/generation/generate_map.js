@@ -3,30 +3,33 @@
 
 //include in head for cdn for leaflet */}
 
-function createMap(start_location) { //connect to mapid of html
-    map = L.map('map').setView([start_location], 11);
+import { instanceData } from './save.js'
+
+export function createMap(start_location) { //connect to mapid of html
+    instanceData.map = L.map('map').setView([start_location], 11);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 17,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-    return map
+    }).addTo(instanceData.map);
 }
 
-function createCircle(map, offset, r) {
-    if(current_circle)
-        map.removeLayer(current_circle)
+//can change parameters to directly import global variables
+//but this is in the html directly i don't know if that is a good idea
+export function createCircle(offset, r) {
+    if(instanceData.current_circle)
+        instanceData.map.removeLayer(instanceData.current_circle)
 
     var new_circle = L.circle(offset, {  //generate offset of circle
         color: 'red',
         fillColor: '#f03',
         fillOpacity: 0.5,
         radius: r
-    }).addTo(map);
-    current_circle = new_circle
+    }).addTo(instanceData.map);
+    instanceData.current_circle = new_circle
 }
 
-function createMarker(map, destination) {
-    var marker = L.marker(destination).addTo(map); //if they cannot find it, add the location
+export function createMarker(destination) {
+    var marker = L.marker(destination).addTo(instanceData.map); //if they cannot find it, add the location
 }
 
 //after leaflet's css

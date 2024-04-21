@@ -1,11 +1,6 @@
-const fs = require('fs'); // Import the File System module
-const ini = require('ini'); // Import the ini module
-const configData = fs.readFileSync('config.ini', 'utf-8');
-const config = ini.parse(configData);
-
 export const apiData = {
-    api_key: config.StreetView.api_key,
-    signature: config.StreetView.signature
+    api_key: 'insert-key',
+    signature: 'insert-signature'
 }
 
 export const instanceData = {
@@ -15,7 +10,7 @@ export const instanceData = {
     image_url: null, //set by streetview function
     
     guesses: 0,
-    maxguesses: config.Settings.maxGuesses,
+    maxguesses: 5,
 
     map: null,
     current_circle: null
